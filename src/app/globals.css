@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Quire — legal cream (locked M0) */
+  --paper:    #fbf8f1;
+  --paper-2:  #f2ecdf;
+  --card:     #ffffff;
+
+  --ink:      #1a1a1a;
+  --ink-2:    #4d4d4d;
+  --ink-3:    #8a8a8a;
+  --ink-4:    #bdbdbd;
+
+  --line:     #e3dbc7;
+  --line-2:   #d1c6a8;
+
+  --accent:      #2e5c3a;
+  --accent-2:    #1d3f25;
+  --accent-soft: #e1eed4;
+
+  --redline:     #9e2e2e;
+  --redline-soft:#f7d9d9;
+
+  --copper:      #a5673f;
+  --copper-soft: #f2dfc9;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-redline: var(--redline);
+  --color-redline-soft: var(--redline-soft);
+  --color-copper: var(--copper);
+  --color-copper-soft: var(--copper-soft);
+
+  --font-sans: var(--font-lato);
+  --font-serif: var(--font-cormorant);
+  --font-mono: var(--font-plex);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  background: var(--paper);
+  color: var(--ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), "Lato", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  line-height: 1.6;
+  letter-spacing: -0.002em;
 }
+
+.display {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+}
+.display-italic {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.008em;
+}
+
+.label {
+  font-family: var(--font-sans), "Lato", sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.mono {
+  font-family: var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.doc {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink);
+  letter-spacing: 0;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 10px;
+  border: 2px solid var(--paper);
+}
+
+::selection {
+  background: var(--copper-soft);
+  color: var(--ink);
+}
+
+.rule        { border: 0; height: 1px; background: var(--line); }
+.rule-thick  { border: 0; height: 2px; background: var(--ink); }
+
+/* Strike-through redline */
+.strike {
+  text-decoration: line-through;
+  text-decoration-color: var(--redline);
+  text-decoration-thickness: 1.5px;
+  color: var(--redline);
+  background: var(--redline-soft);
+  padding: 0 2px;
+}
+.insert {
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0 2px;
+}
+
+/* Subtle sealed-stamp animation */
+@keyframes seal-pop {
+  0%   { transform: rotate(-6deg) scale(0.85); opacity: 0; }
+  60%  { transform: rotate(-4deg) scale(1.08); opacity: 1; }
+  100% { transform: rotate(-4deg) scale(1);    opacity: 1; }
+}
+.seal { animation: seal-pop 0.6s ease-out both; }
