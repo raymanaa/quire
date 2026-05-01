@@ -5,159 +5,194 @@ import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingNav } from "@/components/marketing-nav";
 import { CONTRACTS } from "@/lib/contracts";
 
+/**
+ * Quire landing — the landing itself rendered as a contract document.
+ *
+ * No marketing sections. The page is a signed agreement: title block,
+ * recitals (WHEREAS), Articles I-IV with numbered §§ and indented
+ * sub-clauses, Exhibit A (the live ContractViewer), and a signature
+ * block at the bottom. CTAs are execution lines ("Sign & open"), not
+ * buttons.
+ */
 export default function Landing() {
   return (
     <div className="min-h-screen bg-paper text-ink flex flex-col">
       <MarketingNav />
 
-      <section className="mx-auto w-full max-w-[1240px] px-6 pt-14 md:px-8 md:pt-20">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-14">
-          <div>
-            <div className="label mb-4">CONTRACT REVIEW · BETA</div>
-            <h1 className="display text-[60px] leading-[0.98] tracking-[-0.018em] text-ink md:text-[102px]">
-              Three clauses.
-              <br />
-              <span className="display-italic text-ink-2">Three hours.</span>
-              <br />
-              <span className="display">Three hundred dollars.</span>
+      {/* The "contract page" itself — centered, bordered, indented */}
+      <section className="mx-auto w-full max-w-[920px] px-6 md:px-10 pt-10 pb-6">
+        <article className="border border-ink bg-card rounded-[2px] px-10 py-12 md:px-16 md:py-14 shadow-[0_1px_0_rgba(26,26,26,0.04)]">
+          {/* Title block */}
+          <header className="text-center border-b border-ink pb-6 mb-8">
+            <div className="smallcaps text-[11px] tracking-[0.26em] text-ink-3">
+              Execution Copy · Rev. 0.9
+            </div>
+            <h1 className="display mt-3 text-[42px] leading-[1.08] tracking-[-0.01em] text-ink md:text-[60px]">
+              Master Agreement for the Review of Commercial Contracts
             </h1>
-            <p className="mt-6 max-w-[56ch] text-[16px] leading-[1.75] text-ink-2">
-              Eighty percent of a founder&apos;s contract review is the same
-              three clauses. Quire reads the contract, compares against a
-              playbook, flags the material deviations in plain English, and
-              drafts the counter. Skip the &ldquo;quick look&rdquo; email
-              to your outside counsel.
+            <div className="mt-4 display-italic text-[18px] text-ink-2">
+              by and between Quire, Inc. and the Undersigned Founder
+            </div>
+            <div className="mt-5 flex items-baseline justify-center gap-4 text-[11px] text-ink-3">
+              <span className="smallcaps tracking-[0.18em]">Dated</span>
+              <span className="mono">APRIL · XXI · MMXXVI</span>
+              <span className="smallcaps tracking-[0.18em]">·</span>
+              <span className="mono">Wilmington · DE</span>
+            </div>
+          </header>
+
+          {/* Recitals */}
+          <div className="text-[13.5px] leading-[1.85] text-ink max-w-[64ch] mx-auto doc">
+            <div className="mb-2 smallcaps text-[10.5px] tracking-[0.22em] text-ink-3">
+              Recitals
+            </div>
+            <p className="text-justify indent-8" style={{ hyphens: "auto" }}>
+              <strong className="not-italic">Whereas</strong>, the Founder wishes to execute a
+              commercial contract ({"“"}the MSA{"”"}) without engaging outside
+              counsel on clauses of known market shape;
             </p>
+            <p className="text-justify indent-8 mt-3" style={{ hyphens: "auto" }}>
+              <strong className="not-italic">Whereas</strong>, Quire has developed a playbook of
+              material deviations and standard redlines covering approximately
+              eighty percent (80%) of founder-facing agreements;
+            </p>
+            <p className="text-justify indent-8 mt-3" style={{ hyphens: "auto" }}>
+              <strong className="not-italic">Whereas</strong>, the Parties intend that the Founder
+              retain ultimate authority over all counter-positions and that
+              Quire function solely as a drafting and advisory instrument;
+            </p>
+            <p className="text-justify indent-8 mt-3" style={{ hyphens: "auto" }}>
+              <strong className="not-italic">Now, therefore</strong>, in consideration of the
+              foregoing and for other good and valuable consideration, the receipt
+              and sufficiency of which are hereby acknowledged, the Parties agree
+              as follows.
+            </p>
+          </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                href="/app/new"
-                className="inline-flex items-center gap-2 bg-ink text-paper px-5 py-3 text-[14px] rounded-[3px] hover:bg-ink-2 transition-colors"
-              >
-                <span>Upload a contract</span>
-                <span aria-hidden>↗</span>
-              </Link>
-              <Link
-                href="/app/c-msa-acme"
-                className="inline-flex items-center gap-2 border border-line bg-card px-5 py-3 text-[14px] text-ink-2 rounded-[3px] hover:border-line-2 hover:text-ink transition-colors"
-              >
-                Read a sample MSA
-              </Link>
+          {/* Article I — Services */}
+          <Article num="I" title="Services rendered by Quire">
+            <Clause num="1.1">
+              Quire shall, upon receipt of a fully-formatted commercial contract
+              from the Founder, parse said contract into numbered sections and
+              identify <strong className="text-ink">material</strong> and{" "}
+              <strong className="text-ink">advisory</strong> deviations relative
+              to the founder-friendly playbook then in effect.
+            </Clause>
+            <Clause num="1.2">
+              For each material deviation, Quire shall produce (a) a
+              plain-English summary of the deviation, (b) a citation to the
+              corresponding playbook provision, and (c) a draft redline
+              suitable for counter-execution.
+            </Clause>
+            <Clause num="1.3">
+              The aggregate deliverable of Sections 1.1–1.2 shall be furnished
+              within forty-seven (47) seconds of upload, without expectation of
+              billable hours.
+            </Clause>
+          </Article>
+
+          {/* Article II — with the HeroRedline diagram as an exhibit reference */}
+          <Article num="II" title="Illustration of the foregoing">
+            <Clause num="2.1">
+              The Parties acknowledge that a representative workflow, executed
+              against a standard Master Services Agreement of fourteen (14)
+              pages, is appended below for illustrative purposes only.
+            </Clause>
+          </Article>
+
+          <div className="mt-6 mx-auto max-w-none">
+            <div className="flex items-baseline justify-between border-y border-ink py-2 mb-4">
+              <span className="smallcaps text-[11px] tracking-[0.2em]">Exhibit A · illustrative redline</span>
+              <span className="mono text-[10.5px] text-ink-3">live · no video</span>
             </div>
+            <HeroRedline />
+            <p className="mt-4 text-center text-[11.5px] italic text-ink-2 leading-[1.65] max-w-[60ch] mx-auto">
+              <span className="smallcaps not-italic text-ink">Exhibit A.</span>{" "}
+              An MSA authoring its own redlines. Three material flags surface
+              in-line; the proposed counter-language appears in the margin
+              with a green-boxed insertion. Loop length: fourteen (14) seconds.
+            </p>
+          </div>
 
-            <div className="mt-10 flex flex-wrap items-baseline gap-x-10 gap-y-3 text-[11.5px] text-ink-3">
-              <Stat value="3" unit="clauses" label="Material ones, every time" />
-              <Stat value="47s" unit="first flag" label="From upload to first redline" />
-              <Stat value="1/20" unit="the fee" label="vs. billable-hour review" />
+          {/* Article III — Pricing & engagement (in contract voice) */}
+          <Article num="III" title="Engagement and pricing">
+            <Clause num="3.1">
+              The Founder may engage Quire without procurement review, without
+              information-security review, and without a master service
+              agreement, it being understood that <strong className="text-ink">Quire is not a CLM</strong> and does not propose to be one.
+            </Clause>
+            <Clause num="3.2">
+              Pricing shall be denominated in monthly subscription dollars and
+              shall not exceed one-twentieth (1/20th) of the then-prevailing
+              hourly rate of outside counsel acting in the same matter.
+            </Clause>
+            <Clause num="3.3" note="Advisory">
+              The deliverables contemplated by this Agreement do{" "}
+              <strong className="text-ink">not</strong> constitute legal
+              advice. For the remaining twenty percent (20%) of clauses,
+              the Founder is encouraged to retain outside counsel of suitable
+              competence and character.
+            </Clause>
+          </Article>
+
+          {/* Article IV — Sample contracts as an exhibit */}
+          <Article num="IV" title="Sample engagements">
+            <Clause num="4.1">
+              A non-exhaustive list of past engagements is appended as{" "}
+              Exhibit B below. The Founder may inspect any such engagement for
+              representative output by following the signature-line reference.
+            </Clause>
+          </Article>
+
+          <div className="mt-6">
+            <div className="flex items-baseline justify-between border-y border-ink py-2 mb-4">
+              <span className="smallcaps text-[11px] tracking-[0.2em]">Exhibit B · sample contracts</span>
+              <span className="mono text-[10.5px] text-ink-3">tab between · click a flag</span>
+            </div>
+            <ContractViewer contracts={CONTRACTS} />
+            <p className="mt-4 text-center text-[11.5px] italic text-ink-2 leading-[1.65] max-w-[60ch] mx-auto">
+              <span className="smallcaps not-italic text-ink">Exhibit B.</span>{" "}
+              Three engagements across contract types. Clause navigator shows
+              each material flag; right drawer shows the plain-English
+              rationale and the draft counter.
+            </p>
+          </div>
+
+          {/* Article V — Acceptance */}
+          <Article num="V" title="Acceptance and execution">
+            <Clause num="5.1">
+              The Founder may accept this Agreement by causing a signature to
+              be affixed below, or by clicking the execution line, which
+              shall have the same legal effect as if executed in ink.
+            </Clause>
+          </Article>
+
+          {/* Signature block — replaces the "closing CTA" */}
+          <div className="mt-12 border-t-2 border-ink pt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <SignatureBlock
+                role="The Founder"
+                name="_____________________________"
+                attest="By execution below"
+                subtext="the Founder acknowledges that the playbook is customizable and that any redline is subject to review."
+                signActionHref="/app/new"
+                signLabel="Sign & upload a contract"
+              />
+              <SignatureBlock
+                role="Quire, Inc."
+                name="/s/ Rayen Manaa"
+                attest="By its authorized agent"
+                subtext="portfolio project #8 · alpha · not for production without evaluation"
+                signActionHref="/app"
+                signLabel="Inspect the folder"
+                mutedAction
+              />
+            </div>
+            <div className="mt-8 text-center smallcaps text-[10.5px] tracking-[0.22em] text-ink-3">
+              — End of agreement · countersigned in Wilmington, DE —
             </div>
           </div>
-
-          <figure className="relative">
-            <div className="relative border border-line bg-card rounded-[3px] px-5 py-5 max-w-[460px] ml-auto">
-              <div className="flex items-baseline justify-between">
-                <span className="label" style={{ color: "var(--redline)" }}>
-                  3 MATERIAL FLAGS
-                </span>
-                <span className="mono text-[10.5px] text-ink-3">ACME · MSA</span>
-              </div>
-              <div className="rule my-3" />
-              <p className="display-italic text-[18px] leading-[1.45] text-ink md:text-[20px]">
-                &ldquo;The playbook diff was the fastest $6K I&apos;ve ever
-                saved. We counter-signed Acme the same day.&rdquo;
-              </p>
-              <div className="rule my-3" />
-              <div className="flex items-baseline justify-between text-[11px] text-ink-3">
-                <span className="mono uppercase tracking-[0.1em] text-ink">
-                  J. CHEN
-                </span>
-                <span>Founder &amp; CEO · Velocity Labs</span>
-              </div>
-            </div>
-          </figure>
-        </div>
-
-        <div className="mt-20">
-          <HeroRedline />
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-6 md:px-8 pt-24 pb-4">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_1.6fr] md:gap-16">
-          <div>
-            <div className="label">The method</div>
-            <h2 className="display mt-3 text-[36px] leading-[1.05] tracking-[-0.012em] text-ink md:text-[52px]">
-              Playbook-first,{" "}
-              <span className="display-italic">not LLM-first.</span>
-            </h2>
-          </div>
-          <div className="text-[15.5px] leading-[1.8] text-ink-2 max-w-[60ch]">
-            Quire doesn&apos;t guess what a bad clause looks like. It runs
-            every contract against a named playbook — yours, or the
-            founder-friendly default — and flags exactly where the
-            incoming paper deviates. The model writes the summary and the
-            counter. The playbook decides what counts as material. You can
-            open the playbook, redline it, and know your next contract
-            will be checked against exactly that text.
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-6 md:px-8 pt-14 pb-10">
-        <div className="mb-5 flex items-baseline justify-between">
-          <div className="label">Specimen · Contract viewer</div>
-          <div className="label !tracking-[0.14em]">
-            RENDERED FROM <span className="mono text-ink-2">/app</span> · NOT A SCREENSHOT
-          </div>
-        </div>
-        <ContractViewer contracts={CONTRACTS} />
-        <p className="mt-5 text-[12.5px] leading-[1.65] text-ink-3 max-w-[62ch]">
-          Same component as the in-app reader — tab between three contracts,
-          click a clause dot or a flagged phrase to open its drawer.
-        </p>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-6 md:px-8 pt-20 pb-4">
-        <div className="max-w-[900px]">
-          <div className="label">Quire is not a CLM.</div>
-          <h2 className="display mt-3 text-[36px] leading-[1.08] tracking-[-0.018em] text-ink md:text-[52px]">
-            For the founder with the <span className="display-italic">PDF open.</span>
-          </h2>
-          <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.75] text-ink-2">
-            Ironclad and Icertis are enterprise contract lifecycle
-            management platforms. They require procurement, legal, and six
-            weeks of rollout. Quire is for the founder with a PDF attached
-            to their next email — the MSA is in your hand, you need to
-            sign something back by Friday.
-          </p>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <Pillar num="01" title="No CLM rollout." body="Paste the PDF. Get the flags. Ship the counter. No admin, no legal IT ticket." />
-            <Pillar num="02" title="Your playbook, not ours." body="Start from the founder-friendly default, then redline it. Your playbook is your contract strategy." />
-            <Pillar num="03" title="Not legal advice." body="Quire is a review tool. For the remaining 20%, call your outside counsel. For the first 80%, save them the hour." />
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-6 md:px-8 pt-24 pb-4">
-        <div className="mx-auto max-w-[740px] text-center">
-          <div className="label">Friday · 4:30 PM</div>
-          <h2 className="display mt-4 text-[44px] leading-[1.05] tracking-[-0.012em] text-ink md:text-[64px]">
-            You have the PDF.{" "}
-            <span className="display-italic">You have Quire.</span>
-          </h2>
-          <p className="mt-5 text-[16px] leading-[1.7] text-ink-2">
-            Upload the contract. Read the three flags. Send the counter.
-          </p>
-          <div className="mt-8 inline-flex items-center gap-3">
-            <Link
-              href="/app/new"
-              className="inline-flex items-center gap-2 bg-ink text-paper px-6 py-3 text-[14px] rounded-[3px] hover:bg-ink-2 transition-colors"
-            >
-              <span>Upload a contract</span>
-              <span aria-hidden>↗</span>
-            </Link>
-          </div>
-        </div>
+        </article>
       </section>
 
       <MarketingFooter />
@@ -165,26 +200,93 @@ export default function Landing() {
   );
 }
 
-function Stat({ value, unit, label }: { value: string; unit: string; label: string }) {
+function Article({
+  num,
+  title,
+  children,
+}: {
+  num: string;
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="min-w-0">
-      <div className="display text-[32px] leading-none tabular-nums text-ink">
-        {value}
-        <span className="mono text-[11.5px] text-ink-3 ml-1 font-normal">{unit}</span>
-      </div>
-      <div className="mt-1 text-[11.5px] text-ink-3 max-w-[24ch] italic">{label}</div>
+    <div className="mt-10 max-w-[64ch] mx-auto">
+      <h2 className="display text-[22px] leading-[1.2] text-ink md:text-[26px]">
+        <span className="smallcaps tracking-[0.18em] text-ink-3 mr-3">Article {num}.</span>
+        {title}.
+      </h2>
+      <div className="mt-4 flex flex-col gap-4 doc">{children}</div>
     </div>
   );
 }
 
-function Pillar({ num, title, body }: { num: string; title: string; body: string }) {
+function Clause({
+  num,
+  note,
+  children,
+}: {
+  num: string;
+  note?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <p className="text-[13.5px] leading-[1.85] text-ink text-justify indent-8" style={{ hyphens: "auto" }}>
+      <span className="smallcaps text-ink-3 mr-2 tracking-[0.14em] indent-0">§{num}</span>
+      {note && (
+        <span
+          className="mono text-[10px] mr-2"
+          style={{ color: "var(--copper)" }}
+        >
+          [{note}]
+        </span>
+      )}
+      {children}
+    </p>
+  );
+}
+
+function SignatureBlock({
+  role,
+  name,
+  attest,
+  subtext,
+  signActionHref,
+  signLabel,
+  mutedAction,
+}: {
+  role: string;
+  name: string;
+  attest: string;
+  subtext: string;
+  signActionHref: string;
+  signLabel: string;
+  mutedAction?: boolean;
+}) {
   return (
     <div>
-      <div className="mono text-[10.5px] text-ink-3 tabular-nums tracking-[0.16em]">{num}</div>
-      <h3 className="display mt-2 text-[22px] leading-[1.2] text-ink md:text-[24px]">
-        {title}
-      </h3>
-      <p className="mt-2 text-[13.5px] leading-[1.7] text-ink-2 max-w-[36ch]">{body}</p>
+      <div className="smallcaps text-[11px] tracking-[0.2em] text-ink-3 mb-3">{role}</div>
+      <div
+        className="display-italic text-[26px] leading-[1.1] text-ink pb-1 border-b border-ink mb-2"
+        style={{ fontVariant: "normal" }}
+      >
+        {name}
+      </div>
+      <div className="mono text-[10.5px] text-ink-3 tracking-[0.08em] uppercase">{attest}</div>
+      <p className="mt-3 text-[12px] leading-[1.6] text-ink-2 max-w-[42ch]">{subtext}</p>
+      <Link
+        href={signActionHref}
+        className={[
+          "mt-5 inline-flex items-center gap-1.5 px-4 py-2 text-[12.5px] rounded-[2px] transition-colors",
+          mutedAction
+            ? "border border-line bg-card text-ink-2 hover:border-line-2 hover:text-ink"
+            : "bg-ink text-paper hover:bg-ink-2",
+        ].join(" ")}
+      >
+        <span className="mono text-[10.5px] tracking-[0.12em]">
+          {signLabel}
+        </span>
+        <span aria-hidden>→</span>
+      </Link>
     </div>
   );
 }
