@@ -1,6 +1,6 @@
 # Quire — Contract review for founders
 
-> Portfolio project #8. Paste an MSA or SOW; get plain-English flags on the material clauses, with playbook-driven redlines.
+>  Paste an MSA or SOW; get plain-English flags on the material clauses, with playbook-driven redlines.
 
 ## M0 — Design direction (LOCKED)
 
