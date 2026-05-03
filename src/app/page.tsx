@@ -93,7 +93,7 @@ export default function Landing() {
                 className="underline decoration-2 underline-offset-[3px]"
                 style={{ color: sev.ink, textDecorationColor: sev.ink }}
               >
-                {flag.text ?? "without limitation as to amount or scope"}
+                without limitation as to amount or scope
               </span>
               , provided that Customer promptly notifies Supplier of any such
               claim and cooperates in the defense thereof.
